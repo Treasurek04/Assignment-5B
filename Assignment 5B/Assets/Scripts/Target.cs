@@ -8,7 +8,9 @@ public class Target : MonoBehaviour
 
     private void TakeDamage(float amount)
     {
+
         health -= amount;
+
         if (health <= 0 )
         {
             Die();
@@ -17,18 +19,7 @@ public class Target : MonoBehaviour
 
     void Die()
     {
-        Destory(gameObject)
+        Destroy(gameObject);
     }
    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
