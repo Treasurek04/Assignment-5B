@@ -9,6 +9,7 @@ public class EnemyCounter : MonoBehaviour
 
     void Start()
     {
+        
         enemiesLeft = totalEnemies;
         UpdateEnemyUI();
     }
@@ -17,9 +18,14 @@ public class EnemyCounter : MonoBehaviour
     {
         if (enemiesLeft > 0)
         {
-            enemiesLeft--;
+            enemiesLeft -= 1;
             UpdateEnemyUI();
         }
+    }
+
+    public int TotalEnemiesLeft()
+    {
+        return enemiesLeft;
     }
 
     private void UpdateEnemyUI()

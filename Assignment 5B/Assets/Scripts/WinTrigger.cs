@@ -1,18 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public EnemyCounter enemyCounter;
+    public Text gameOverText;
+    private bool gameOver = false;
+
     void Start()
     {
-        
+        if (gameOverText != null)
+        {
+            gameOverText.gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (gameOver && Input.GetKeyDown(KeyCode.R))
+        {
+            RetryGame();
+        }
+    }
+
+    private void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            gameOver = true;
+            if (gameOverText != null)
+            {
+                gameOverText.gameObject.SetActive(true);
+                gameOverText.text = "Game Over! Press R to Retry";
+            }
+            Time.timeScale = 0f; 
+        }
     }
 }
