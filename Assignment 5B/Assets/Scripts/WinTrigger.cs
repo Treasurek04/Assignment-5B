@@ -37,7 +37,7 @@ public class WinTrigger : MonoBehaviour
             if (gameOverText != null)
             {
                 gameOverText.gameObject.SetActive(true);
-                gameOverText.text = "Game Over! Press R to Retry";
+                gameOverText.text = "You Win! Press R to Retry";
             }
             Time.timeScale = 0f; 
         }

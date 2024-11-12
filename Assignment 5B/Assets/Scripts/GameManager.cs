@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public int score;
+    public static int score;  
+    public GameObject pauseMenu;
+
     private string CurrentLevelName = string.Empty;
 
-    #region This code makes this class a singleton
 
-    public static GameManager instance;
+    //#region This code makes this class a singleton
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+    //public static GameManager instance;
 
-        }
-        else
-        {
-            Destroy(gameObject);
-            Debug.LogError("Trying to instantiate a second instance of singleton Game Manager");
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
 
-    #endregion
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //        Debug.LogError("Trying to instantiate a second instance of singleton Game Manager");
+    //    }
+    //}
+
+    //#endregion
 
 
     public void LoadLevel(string levelName)
@@ -54,5 +57,36 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+    }
+
+    public void UnloadCurrentLevel()
+    {
+        AsyncOperation ao = SceneManager.UnloadSceneAsync(CurrentLevelName);
+
+        if (ao == null)
+        {
+            Debug.LogError("[GameManager] unable to unload level " + CurrentLevelName);
+            return;
+        }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            Pause();
+        }
     }
 }
