@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ColorSwap : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public MeshRenderer box;
+    public Color colorMix;
+    bool swap;
 
-    // Update is called once per frame
-    void Update()
+   public void Start()
     {
-        
+        box.material.color = colorMix;
     }
 }
