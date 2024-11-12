@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,13 +15,18 @@ public class EnemyCounter : MonoBehaviour
 
     public void EnemyDestroyed()
     {
-        enemiesLeft--;
-        if (enemiesLeft < 0) enemiesLeft = 0;
-        UpdateEnemyUI();
+        if (enemiesLeft > 0)
+        {
+            enemiesLeft--;
+            UpdateEnemyUI();
+        }
     }
 
     private void UpdateEnemyUI()
     {
-        enemiesLeftText.text = "Enemies Left: " + enemiesLeft;
+        if (enemiesLeftText != null)
+        {
+            enemiesLeftText.text = "Enemies Left: " + enemiesLeft;
+        }
     }
 }
