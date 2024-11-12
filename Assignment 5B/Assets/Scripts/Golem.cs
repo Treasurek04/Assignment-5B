@@ -10,7 +10,9 @@ public class Golem : EnemyTest
     protected override void Awake()
     {
         base.Awake();
-        health = 120; 
+        health = 120;
+
+        GameManager.instance.score += 2;
 
     }
 
